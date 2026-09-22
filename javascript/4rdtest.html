@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원 등급 및 적립금 계산기</title>
+</head>
+<body>
+    <div id="contents">
+        <h2>회원 등급 및 적립금 계산기</h2>
+        <ul>
+            <li>
+                <label for="price1">금액 1 : </label>
+                <input type="text" id="price1" value=""> 원
+            </li>
+            <li>
+                <label for="price2">금액 2 : </label>
+                <input type="text" id="price2" value=""> 원
+            </li>
+            <li>
+                <label for="price3">금액 3 : </label>
+                <input type="text" id="price3" value=""> 원
+            </li>
+            <li>
+                <button type="button" onclick="calculateGrade()">등급 및 적립금 확인하기</button>
+            </li>
+        </ul>
+
+        <div id="showResult"></div>
+    </div>
+<script>
+    function calculateGrade() {
+    var p1 = Number(document.querySelector('#price1').value);
+    var p2 = Number(document.querySelector('#price2').value);
+    var p3 = Number(document.querySelector('#price3').value);
+
+    var total = p1 + p2 + p3;
+    var grade = "";
+    var saveRate = 0; 
+
+    if (total >= 50000) {
+        grade = "VIP";
+        saveRate = 0.03; 
+    } else if (total >= 30000) {
+        grade = "GOLD";
+        saveRate = 0.02; 
+    } else {
+        grade = "SILVER";
+        saveRate = 0.01; 
+    }
+
+    var savedMoney =(total * saveRate);
+
+    document.querySelector('#showResult').innerHTML = 
+        "총 구매 금액은" + "<strong>" + total+ "원</strong>" + "이며, " + "회원 등급은" + "<strong> " + grade + " </strong>" + "이므로 " +
+        "적립률은" + "<strong>" + (saveRate * 100) + "%</strong>" + "이며, 구매하신 금액의 적립금은" + "<strong>" + savedMoney + "원</strong>" + "입니다.";
+}
+</script>
+</body>
+</html>
