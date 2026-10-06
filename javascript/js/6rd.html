@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>지도</title>
+</head>
+<body>
+<script>
+    let text = "";
+
+for (let i = 10; i > 0; i--) {
+  if (i === 3) { continue; }
+  text += i + "<br>";
+}
+
+document.getElementById("demo").innerHTML = text;
+
+let text = ""
+let i = 0;
+let sum = 0;
+
+do {
+  text += "<br>The number is " + i;
+  sum= sum += i
+  i+= 5;
+}
+while (i <= 100); 
+
+document.getElementById("demo").innerHTML =
+"the number is " + sum;
+
+let text = "";
+
+for (let i = 0; i < 100; i+=2) {
+  text += "The number is " + i + "<br>";
+}
+
+document.getElementById("demo").innerHTML = text;
+</script>
+
+
+
+   <button class="naver-map-btn" onclick="openNaverMap()">
+        네이버 지도로 보기
+    </button>
+<a href="https://www.google.com/maps" 
+       target="_blank" 
+       rel="noopener noreferrer" 
+       class="google-map-link">
+        구글 지도로 보기 (새창)
+    </a>
+</body>
+</html>
