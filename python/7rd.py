@@ -93,4 +93,4 @@ for i in range(0, len(instr)):
         outstr += instr[i]
 
 print("원래 문자열==>" + '[' + instr+']')
-print("공백 삭제 문자열==> " + '[' + outstr + ']')
+print("<> 삭제 문자열==> " + '[' + outstr + ']')
