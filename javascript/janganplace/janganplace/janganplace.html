@@ -1,0 +1,517 @@
+
+<!DOCTYPE html>
+
+
+<html lang="ko" class="dark">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>장안플레이스 | Jangan Place - 장안대생 핫플 포털</title>
+
+    
+
+    <!-- Tailwind CSS CDN -->
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+
+        tailwind.config = {
+
+            darkMode: 'class',
+
+            theme: {
+
+                extend: {
+
+                    colors: {
+
+                        brand: {
+
+                            dark: '#0B0F17',
+
+                            card: 'rgba(18, 24, 38, 0.75)',
+
+                            border: 'rgba(255, 255, 255, 0.1)',
+
+                            accent: '#6366f1',
+
+                            neonBlue: '#00f0ff',
+
+                            neonPurple: '#7000ff',
+
+                            neonPink: '#ff007f',
+
+                            neonGreen: '#00ff66'
+
+                        }
+
+                    },
+
+                    animation: {
+
+                        'pulse-glow': 'pulseGlow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+
+                        'float': 'float 6s ease-in-out infinite',
+
+                        'marquee': 'marquee 25s linear infinite',
+
+                    },
+
+                    keyframes: {
+
+                        pulseGlow: {
+
+                            '0%, 100%': { opacity: 0.8, filter: 'drop-shadow(0 0 15px rgba(0,240,255,0.6))' },
+
+                            '50%': { opacity: 0.4, filter: 'drop-shadow(0 0 5px rgba(0,240,255,0.2))' }
+
+                        },
+
+                        float: {
+
+                            '0%, 100%': { transform: 'translateY(0px)' },
+
+                            '50%': { transform: 'translateY(-10px)' }
+
+                        },
+
+                        marquee: {
+
+                            '0%': { transform: 'translateX(0%)' },
+
+                            '100%': { transform: 'translateX(-50%)' }
+
+                        }
+
+                    }
+
+                }
+
+            }
+
+        }
+
+    </script>
+
+    
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    
+
+    <!-- Custom CSS Link -->
+
+    <link rel="stylesheet" href="janganplace.css">
+
+</head>
+
+<body class="min-h-screen flex flex-col justify-between selection:bg-cyan-500 selection:text-black">
+
+
+
+    <header class="sticky top-0 z-40 w-full glass-panel border-b border-white/10">
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+
+            <!-- Logo -->
+
+            <a href="#" class="flex items-center gap-3 group">
+
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-500 via-indigo-500 to-fuchsia-500 p-[2px] transition-transform duration-300 group-hover:scale-110">
+
+                    <div class="w-full h-full bg-slate-950 rounded-[10px] flex items-center justify-center">
+
+                        <i class="fa-solid fa-bolt text-cyan-400 text-lg animate-pulse"></i>
+
+                    </div>
+
+                </div>
+
+                <div>
+
+                    <span class="text-xl font-black tracking-wider bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-fuchsia-400 to-indigo-400">
+
+                        장안플레이스
+
+                    </span>
+
+                    <span class="text-[10px] block text-cyan-400/80 font-mono tracking-widest uppercase">JANGAN PLACE v2.0</span>
+
+                </div>
+
+            </a>
+
+
+
+            <!-- Quick Action & Stats -->
+
+            <div class="flex items-center gap-3 sm:gap-4">
+
+                <button onclick="toggleBookmarkDrawer()" class="relative px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 text-xs font-semibold hover:bg-white/10 transition hover:border-cyan-400/50 flex items-center gap-2">
+
+                    <i class="fa-solid fa-bookmark text-amber-400"></i>
+
+                    <span>북마크</span>
+
+                    <span id="bookmarkCount" class="bg-cyan-500/20 text-cyan-300 px-1.5 py-0.5 rounded-full text-[10px] font-bold">0</span>
+
+                </button>
+
+                <a href="#mapSection" class="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-xs font-semibold hover:bg-cyan-500/20 transition">
+
+                    <i class="fa-solid fa-map-location-dot"></i> 지도 뷰
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+
+    <section class="relative overflow-hidden py-12 lg:py-16">
+
+        <!-- Ambient Glowing Background Orbs -->
+
+        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-gradient-to-r from-cyan-600/20 via-fuchsia-600/20 to-indigo-600/20 blur-[120px] rounded-full pointer-events-none"></div>
+
+
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+
+            <div class="text-center max-w-3xl mx-auto">
+
+                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 text-xs font-bold mb-6 backdrop-blur-md">
+
+                    <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
+
+                    🔥 장안대학교 상권·캠퍼스 라이프 포털
+
+                </div>
+
+                <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-tight mb-6">
+
+                    장안대생을 위한 <br class="hidden sm:block">
+
+                    <span class="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-fuchsia-400 to-amber-300 neon-text-blue">
+
+                        리얼 핫플 가이드
+
+                    </span>
+
+                </h1>
+
+                <p class="text-gray-400 text-sm sm:text-base mb-8 max-w-xl mx-auto font-light">
+
+                    학교 앞 숨은 맛집부터 꿀공강 감성 카페, 신나는 놀거리까지! <br>선배들과 동기들이 실시간 추천하는 힙한 스팟 모음집.
+
+                </p>
+
+
+
+                <!-- Search Bar -->
+
+                <div class="relative max-w-xl mx-auto mb-10">
+
+                    <div class="relative glass-panel rounded-2xl p-1.5 flex items-center border-white/15 focus-within:border-cyan-400/80 transition-all shadow-2xl shadow-cyan-950/40">
+
+                        <i class="fa-solid fa-magnifying-glass text-gray-400 text-lg ml-4"></i>
+
+                        <input type="text" id="searchInput" placeholder="상호명, 키워드 검색 (예: 엽기떡볶이, 보배반점, 국밥, 햄버거)" 
+
+                               class="w-full bg-transparent px-4 py-3 text-sm text-white placeholder-gray-500 focus:outline-none">
+
+                        <button id="clearSearchBtn" class="hidden text-gray-400 hover:text-white px-2 text-sm">
+
+                            <i class="fa-solid fa-xmark"></i>
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- Live Vibe Ticker (Marquee) -->
+
+            <div class="glass-panel rounded-xl py-2.5 px-4 overflow-hidden border-white/10 flex items-center gap-4">
+
+                <span class="shrink-0 text-xs font-bold px-2.5 py-1 rounded bg-fuchsia-500/20 text-fuchsia-300 border border-fuchsia-500/40">
+
+                    <i class="fa-solid fa-bolt text-amber-400 mr-1"></i> LIVE TICKER
+
+                </span>
+
+                <div class="overflow-hidden whitespace-nowrap w-full relative">
+
+                    <div class="inline-block animate-marquee text-xs text-gray-300 font-medium">
+
+                        <span class="mx-4">🍜 [중식] 진한 불향 짬뽕이 일품! 보배반점 봉담점</span>
+
+                        <span class="mx-4">🌶️ [떡볶이] 스트레스 날리는 매운맛 동대문 엽기떡볶이</span>
+
+                        <span class="mx-4">🍔 [햄버거] 프리미엄 수제버거 맛집 왓더버거</span>
+
+                        <span class="mx-4">🍲 [국밥] 든든한 진국 육수 만복돼지국밥</span>
+
+                        <span class="mx-4">🔥 [마라탕] 장안대생 마라 혈중 농도 채워주는 탕화쿵푸</span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 w-full flex-grow">
+
+        
+
+        <!-- Category Filter Tabs -->
+
+        <div class="flex items-center justify-start sm:justify-center gap-2 overflow-x-auto pb-4 mb-8 no-scrollbar" id="categoryContainer">
+
+            <!-- JavaScript rendering categories dynamically -->
+
+        </div>
+
+
+
+        <!-- Filter Utility Options -->
+
+        <div class="flex flex-col sm:flex-row justify-between items-center gap-4 mb-6 text-xs text-gray-400">
+
+            <div class="flex items-center gap-2">
+
+                <span>총 <strong id="placeCount" class="text-cyan-400 font-bold">0</strong>개의 핫플레이스</span>
+
+            </div>
+
+            <div class="flex items-center gap-3">
+
+                <button id="sortRatingBtn" class="hover:text-cyan-400 transition flex items-center gap-1 font-medium">
+
+                    <i class="fa-solid fa-star text-amber-400"></i> 별점순
+
+                </button>
+
+                <span class="text-gray-700">|</span>
+
+                <button id="sortLikeBtn" class="hover:text-cyan-400 transition flex items-center gap-1 font-medium">
+
+                    <i class="fa-solid fa-heart text-fuchsia-400"></i> 좋아요순
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+
+        <div id="placesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+            <!-- Dynamic Cards Populated Here -->
+
+        </div>
+
+
+
+        <!-- Empty State Container -->
+
+        <div id="emptyState" class="hidden text-center py-16 glass-card rounded-2xl my-6">
+
+            <i class="fa-solid fa-compass-slash text-4xl text-gray-600 mb-3"></i>
+
+            <h3 class="text-lg font-bold text-gray-300">검색 결과가 없습니다</h3>
+
+            <p class="text-gray-500 text-xs mt-1">다른 키워드나 카테고리를 선택해 보세요!</p>
+
+        </div>
+
+
+
+        <section id="mapSection" class="mt-16 pt-12 border-t border-white/10">
+
+            <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-6">
+
+                <div>
+
+                    <h2 class="text-2xl font-black text-white flex items-center gap-2">
+
+                        <i class="fa-solid fa-map-location-dot text-cyan-400"></i> 장안대 주변 핫플 지도
+
+                    </h2>
+
+                    <p class="text-xs text-gray-400 mt-1">마커를 클릭하면 원하는 장소의 상세 네이버 지도 길찾기로 연결됩니다.</p>
+
+                </div>
+
+                <div class="flex items-center gap-2 text-xs">
+
+                    <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-cyan-500/10 text-cyan-300 border border-cyan-500/20">
+
+                        <i class="fa-solid fa-graduation-cap"></i> 장안대학교 중심
+
+                    </span>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- Map View Container -->
+
+            <div class="glass-panel rounded-2xl overflow-hidden border border-white/15 relative h-[450px] flex flex-col md:flex-row">
+
+                <!-- Interactive Spots Sidebar -->
+
+                <div class="w-full md:w-80 bg-slate-950/80 border-b md:border-b-0 md:border-r border-white/10 p-4 overflow-y-auto max-h-48 md:max-h-full">
+
+                    <h3 class="text-xs font-bold text-cyan-400 uppercase tracking-wider mb-3">quick location list</h3>
+
+                    <div id="mapSidebarList" class="space-y-2">
+
+                        <!-- Populated by JS -->
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- Simulated Interactive Map Viewer -->
+
+                <div class="relative flex-grow bg-slate-900 overflow-hidden flex items-center justify-center group" id="mapDisplayArea">
+
+                    <!-- Map Graphic Background Simulation -->
+
+                    <div class="absolute inset-0 opacity-40 bg-[radial-gradient(#1e293b_1px,transparent_1px)] [background-size:16px_16px]"></div>
+
+                    
+
+                    <div class="relative z-10 text-center p-6 max-w-md backdrop-blur-md bg-slate-950/70 rounded-2xl border border-white/10 shadow-2xl">
+
+                        <div class="w-14 h-14 mx-auto mb-4 rounded-2xl bg-gradient-to-tr from-cyan-500 to-fuchsia-500 p-[2px] shadow-lg shadow-cyan-500/30">
+
+                            <div class="w-full h-full bg-slate-950 rounded-[14px] flex items-center justify-center">
+
+                                <i class="fa-solid fa-location-dot text-2xl text-cyan-400 animate-bounce"></i>
+
+                            </div>
+
+                        </div>
+
+                        <h4 id="mapPreviewTitle" class="text-lg font-bold text-white mb-1">장안대학교 정문 중심가</h4>
+
+                        <p id="mapPreviewDesc" class="text-xs text-gray-400 mb-4">경기도 화성시 봉담읍 삼천병마로 1182 (장안대학교)</p>
+
+                        <a id="mapPreviewBtn" href="https://map.naver.com/v5/search/%EC%9E%A5%EC%95%88%EB%8C%80%ED%95%99%EA%B5%90" target="_blank" 
+
+                           class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-emerald-500 to-green-600 text-white text-xs font-bold shadow-lg shadow-green-500/20 hover:scale-105 transition">
+
+                            <i class="fa-solid fa-paper-plane"></i> 네이버 지도로 열기
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+    </main>
+
+
+
+    <div id="bookmarkDrawer" class="fixed inset-y-0 right-0 z-50 w-full max-w-sm glass-panel bg-slate-950/95 border-l border-white/10 shadow-2xl transform translate-x-full transition-transform duration-300 ease-in-out flex flex-col">
+
+        <div class="p-4 border-b border-white/10 flex items-center justify-between">
+
+            <h3 class="text-base font-bold text-white flex items-center gap-2">
+
+                <i class="fa-solid fa-bookmark text-amber-400"></i> 내가 저장한 장소
+
+            </h3>
+
+            <button onclick="toggleBookmarkDrawer()" class="p-2 text-gray-400 hover:text-white rounded-lg">
+
+                <i class="fa-solid fa-xmark text-lg"></i>
+
+            </button>
+
+        </div>
+
+        <div id="bookmarkList" class="p-4 flex-grow overflow-y-auto space-y-3">
+
+            <!-- Bookmarked items injected here -->
+
+        </div>
+
+        <div class="p-4 border-t border-white/10 text-center">
+
+            <p class="text-[11px] text-gray-500">브라우저 내 저장소(LocalStorage)에 안전하게 유지됩니다.</p>
+
+        </div>
+
+    </div>
+
+
+
+    <footer class="mt-20 border-t border-white/10 glass-panel py-8">
+
+        <div class="max-w-7xl mx-auto px-4 text-center sm:flex sm:justify-between sm:items-center">
+
+            <div class="mb-4 sm:mb-0">
+
+                <span class="text-sm font-bold text-white">장안플레이스 (Jangan Place)</span>
+
+                <p class="text-xs text-gray-500 mt-0.5">Designed for Jangan University Students</p>
+
+            </div>
+
+            <p class="text-xs text-gray-500">
+
+                &copy; 2026 Jangan Place. All Rights Reserved. Data synced with Naver Maps.
+
+            </p>
+
+        </div>
+
+    </footer>
+
+
+
+    <!-- Custom JavaScript Link -->
+
+    <script src="janganplace.js"></script>
+
+</body>
+
+</html>
